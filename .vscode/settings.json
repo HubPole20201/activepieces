@@ -1,13 +1,19 @@
 {
-    "cSpell.words": [
-        "Activepieces",
-        "Fastify",
-        "mpim",
-        "sendgrid"
-    ],
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit"
-    },
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "javascript.preferences.importModuleSpecifier": "project-relative"
+  "cSpell.words": ["Activepieces", "Fastify", "mpim", "sendgrid"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "javascript.preferences.importModuleSpecifier": "project-relative",
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "127.0.0.1",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "Activepieces",
+      "username": "postgres",
+      "database": "activepieces"
+    }
+  ]
 }

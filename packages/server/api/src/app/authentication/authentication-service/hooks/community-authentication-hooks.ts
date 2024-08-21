@@ -21,15 +21,15 @@ export const communityAuthenticationServiceHooks: AuthenticationServiceHooks = {
         }
     },
     async postSignUp({ user }) {
-        const platformCreated = await platformService.hasAnyPlatforms()
-        if (platformCreated) {
-            assertNotNullOrUndefined(user.platformId, 'user.platformId')
-            await userInvitationsService.provisionUserInvitation({
-                email: user.email,
-                platformId: user.platformId,
-            })
-            return getProjectAndToken(user)
-        }
+        // const platformCreated = await platformService.hasAnyPlatforms()
+        // if (platformCreated) {
+        //     assertNotNullOrUndefined(user.platformId, 'user.platformId')
+        //     await userInvitationsService.provisionUserInvitation({
+        //         email: user.email,
+        //         platformId: user.platformId,
+        //     })
+        //     return getProjectAndToken(user)
+        // }
         const platform = await platformService.create({
             ownerId: user.id,
             name: DEFAULT_PLATFORM_NAME,

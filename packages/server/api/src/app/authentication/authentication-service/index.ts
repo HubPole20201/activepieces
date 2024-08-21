@@ -23,7 +23,7 @@ import { Provider } from './hooks/authentication-service-hooks'
 
 export const authenticationService = {
     async signUp(params: SignUpParams): Promise<AuthenticationResponse> {
-        await hooks.get().preSignUp(params)
+        // await hooks.get().preSignUp(params)
         const user = await createUser(params)
 
         return this.signUpResponse({
@@ -38,7 +38,6 @@ export const authenticationService = {
             platformId: request.platformId,
             email: request.email,
         })
-
         assertUserIsAllowedToSignIn(user)
 
         await assertPasswordMatches({
@@ -232,13 +231,13 @@ const sendTelemetry = async ({
 
 async function saveNewsLetterSubscriber(user: User): Promise<void> {
     const isPlatformUserOrNotSubscribed =
-    (!isNil(user.platformId) &&
-      !flagService.isCloudPlatform(user.platformId)) ||
-    !user.newsLetter
+        (!isNil(user.platformId) &&
+            !flagService.isCloudPlatform(user.platformId)) ||
+        !user.newsLetter
     const environment = system.get(SharedSystemProp.ENVIRONMENT)
     if (
         isPlatformUserOrNotSubscribed ||
-    environment !== ApEnvironment.PRODUCTION
+        environment !== ApEnvironment.PRODUCTION
     ) {
         return
     }

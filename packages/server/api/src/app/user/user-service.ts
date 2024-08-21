@@ -19,7 +19,6 @@ import { passwordHasher } from '../authentication/lib/password-hasher'
 import { repoFactory } from '../core/db/repo-factory'
 import { UserEntity } from './user-entity'
 
-
 const repo = repoFactory(UserEntity)
 
 export const userService = {
@@ -36,15 +35,22 @@ export const userService = {
 
         return repo().save(user)
     },
-    async update({ id, status, platformId, platformRole }: UpdateParams): Promise<User> {
-        const updateResult = await repo().update({
-            id,
-            platformId,
-        },
-        {
-            ...spreadIfDefined('status', status),
-            ...spreadIfDefined('platformRole', platformRole),
-        })
+    async update({
+        id,
+        status,
+        platformId,
+        platformRole,
+    }: UpdateParams): Promise<User> {
+        const updateResult = await repo().update(
+            {
+                id,
+                platformId,
+            },
+            {
+                ...spreadIfDefined('status', status),
+                ...spreadIfDefined('platformRole', platformRole),
+            },
+        )
         if (updateResult.affected !== 1) {
             throw new ActivepiecesError({
                 code: ErrorCode.ENTITY_NOT_FOUND,
@@ -178,11 +184,9 @@ type DeleteParams = {
     platformId: PlatformId
 }
 
-
 type ListParams = {
     platformId: PlatformId
 }
-
 
 type UpdateParams = {
     id: UserId
